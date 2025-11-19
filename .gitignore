@@ -33,7 +33,8 @@ dist/
 /lib/
 .env
 *storybook.log
-.claude
+.claude/*
+!.claude/skills/
 
 # Shadcn Registry
 public/r/
