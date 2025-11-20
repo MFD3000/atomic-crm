@@ -1,0 +1,8 @@
+<svg width="240" height="48" viewBox="0 0 240 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- US PROSTHETIX logo for dark mode (white text) -->
+  <text x="0" y="32" font-family="Oswald, sans-serif" font-size="28" font-weight="700" letter-spacing="1.5" fill="#ffffff" text-transform="uppercase">
+    US PROSTHETIX
+  </text>
+  <!-- Bionic Blue accent line -->
+  <rect x="0" y="40" width="60" height="3" fill="#2563eb"/>
+</svg>
