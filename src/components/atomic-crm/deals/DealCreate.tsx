@@ -12,6 +12,7 @@ import { SaveButton } from "@/components/admin/form";
 import { FormToolbar } from "@/components/admin/simple-form";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
+import { useConfigurationContext } from "../root/ConfigurationContext";
 import type { Deal } from "../types";
 import { DealInputs } from "./DealInputs";
 
@@ -19,6 +20,7 @@ export const DealCreate = ({ open }: { open: boolean }) => {
   const redirect = useRedirect();
   const dataProvider = useDataProvider();
   const { data: allDeals } = useListContext<Deal>();
+  const { currentBoard } = useConfigurationContext();
 
   const handleClose = () => {
     redirect("/deals");
@@ -81,6 +83,7 @@ export const DealCreate = ({ open }: { open: boolean }) => {
               sales_id: identity?.id,
               contact_ids: [],
               index: 0,
+              board_id: currentBoard?.id || 1,
             }}
           >
             <DealInputs />

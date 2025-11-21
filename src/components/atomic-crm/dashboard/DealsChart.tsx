@@ -7,10 +7,12 @@ import { memo, useMemo } from "react";
 import type { Deal } from "../types";
 
 const multiplier = {
-  opportunity: 0.2,
-  "proposal-sent": 0.5,
-  "in-negociation": 0.8,
-  delayed: 0.3,
+  inquiry: 0.2,
+  assessment: 0.4,
+  fitting: 0.6,
+  fabrication: 0.8,
+  delivery: 0.9,
+  "follow-up": 0.95,
 };
 
 const threeMonthsAgo = new Date(
@@ -98,7 +100,7 @@ export const DealsChart = memo(() => {
           data={months}
           indexBy="date"
           keys={["won", "pending", "lost"]}
-          colors={["#61cdbb", "#97e3d5", "#e25c3b"]}
+          colors={["#10b981", "#2563eb", "#ef4444"]}
           margin={{ top: 30, right: 50, bottom: 30, left: 0 }}
           padding={0.3}
           valueScale={{
@@ -176,7 +178,7 @@ export const DealsChart = memo(() => {
                 axis: "y",
                 value: 0,
                 lineStyle: { strokeOpacity: 0 },
-                textStyle: { fill: "#2ebca6" },
+                textStyle: { fill: "#10b981" },
                 legend: "Won",
                 legendPosition: "top-left",
                 legendOrientation: "vertical",
@@ -185,10 +187,10 @@ export const DealsChart = memo(() => {
                 axis: "y",
                 value: 0,
                 lineStyle: {
-                  stroke: "#f47560",
+                  stroke: "#ef4444",
                   strokeWidth: 1,
                 },
-                textStyle: { fill: "#e25c3b" },
+                textStyle: { fill: "#ef4444" },
                 legend: "Lost",
                 legendPosition: "bottom-left",
                 legendOrientation: "vertical",

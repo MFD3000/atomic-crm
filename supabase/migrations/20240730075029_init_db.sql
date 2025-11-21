@@ -551,15 +551,16 @@ using (true);
 
 
 -- Use Postgres to create a bucket.
+-- Commented out because storage is disabled
+-- insert into storage.buckets
+--   (id, name, public)
+-- values
+--   ('attachments', 'attachments', true);
 
-insert into storage.buckets
-  (id, name, public)
-values
-  ('attachments', 'attachments', true);
-
-CREATE POLICY "Attachments 1mt4rzk_0" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'attachments');
-CREATE POLICY "Attachments 1mt4rzk_1" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'attachments');
-CREATE POLICY "Attachments 1mt4rzk_3" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'attachments');
+-- Storage policies commented out because storage is disabled
+-- CREATE POLICY "Attachments 1mt4rzk_0" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'attachments');
+-- CREATE POLICY "Attachments 1mt4rzk_1" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'attachments');
+-- CREATE POLICY "Attachments 1mt4rzk_3" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'attachments');
 
 -- Use Postgres to create views for companies.
 

@@ -1,41 +1,42 @@
 import { Mars, NonBinary, Venus } from "lucide-react";
 
-export const defaultDarkModeLogo = "./logos/logo_atomic_crm_dark.svg";
-export const defaultLightModeLogo = "./logos/logo_atomic_crm_light.svg";
+export const defaultDarkModeLogo = "./logos/logo_us_prosthetix_dark.svg";
+export const defaultLightModeLogo = "./logos/logo_us_prosthetix_light.svg";
 
-export const defaultTitle = "Atomic CRM";
+export const defaultTitle = "US Prosthetix";
 
 export const defaultCompanySectors = [
-  "Communication Services",
-  "Consumer Discretionary",
-  "Consumer Staples",
-  "Energy",
-  "Financials",
-  "Health Care",
-  "Industrials",
-  "Information Technology",
-  "Materials",
-  "Real Estate",
-  "Utilities",
+  "Medical Devices",
+  "Prosthetics/Orthotics",
+  "Healthcare Services",
+  "Medical Billing",
+  "Rehabilitation",
+  "Physical Therapy",
+  "Orthopedic Care",
+  "Durable Medical Equipment",
+  "Healthcare Technology",
+  "Medical Supply",
 ];
 
 export const defaultDealStages = [
-  { value: "opportunity", label: "Opportunity" },
-  { value: "proposal-sent", label: "Proposal Sent" },
-  { value: "in-negociation", label: "In Negotiation" },
+  { value: "inquiry", label: "Inquiry" },
+  { value: "assessment", label: "Assessment" },
+  { value: "fitting", label: "Fitting" },
+  { value: "fabrication", label: "Fabrication" },
+  { value: "delivery", label: "Delivery" },
+  { value: "follow-up", label: "Follow-up" },
   { value: "won", label: "Won" },
   { value: "lost", label: "Lost" },
-  { value: "delayed", label: "Delayed" },
 ];
 
 export const defaultDealPipelineStatuses = ["won"];
 
 export const defaultDealCategories = [
-  "Other",
-  "Copywriting",
-  "Print project",
-  "UI Design",
-  "Website design",
+  "Prosthetics",
+  "Orthotics",
+  "Both",
+  "Franchise Opportunity",
+  "Billing Services",
 ];
 
 export const defaultNoteStatuses = [
@@ -47,14 +48,15 @@ export const defaultNoteStatuses = [
 
 export const defaultTaskTypes = [
   "None",
-  "Email",
-  "Demo",
-  "Lunch",
-  "Meeting",
-  "Follow-up",
-  "Thank you",
-  "Ship",
-  "Call",
+  "Patient Assessment",
+  "Fitting Appointment",
+  "Fabrication Check",
+  "Delivery Scheduled",
+  "Follow-up Call",
+  "Billing Review",
+  "Franchisee Meeting",
+  "Doctor Consultation",
+  "51 Oakwood Prospect Call",
 ];
 
 export const defaultContactGender = [

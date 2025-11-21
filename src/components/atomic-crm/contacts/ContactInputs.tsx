@@ -27,6 +27,7 @@ export const ContactInputs = () => {
         <div className="flex flex-col gap-10 flex-1">
           <ContactIdentityInputs />
           <ContactPositionInputs />
+          <ContactUSProsthetixInputs />
         </div>
         <Separator
           orientation={isMobile ? "horizontal" : "vertical"}
@@ -201,6 +202,29 @@ const ContactMiscInputs = () => {
           validate={required()}
         />
       </ReferenceInput>
+    </div>
+  );
+};
+
+const ContactUSProsthetixInputs = () => {
+  return (
+    <div className="flex flex-col gap-4">
+      <h6 className="text-lg font-semibold">Patient Information</h6>
+      <SelectInput
+        source="patient_type"
+        label="Patient Type"
+        choices={[
+          { id: "prosthetics", name: "Prosthetics" },
+          { id: "orthotics", name: "Orthotics" },
+          { id: "both", name: "Both" },
+        ]}
+        helperText={false}
+      />
+      <TextInput
+        source="referring_doctor"
+        label="Referring Doctor"
+        helperText={false}
+      />
     </div>
   );
 };

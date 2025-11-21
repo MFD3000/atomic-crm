@@ -4,6 +4,7 @@ import { TextInput } from "@/components/admin/text-input";
 import { SelectInput } from "@/components/admin/select-input";
 import { ArrayInput } from "@/components/admin/array-input";
 import { SimpleFormIterator } from "@/components/admin/simple-form-iterator";
+import { BooleanInput } from "@/components/admin/boolean-input";
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -33,6 +34,7 @@ export const CompanyInputs = () => {
         <div className="flex flex-col gap-10 flex-1">
           <CompanyContactInputs />
           <CompanyContextInputs />
+          <CompanyUSProsthetixInputs />
         </div>
         <Separator orientation={isMobile ? "horizontal" : "vertical"} />
         <div className="flex flex-col gap-8 flex-1">
@@ -152,6 +154,35 @@ const CompanyAccountManagerInput = () => {
           optionText={saleOptionRenderer}
         />
       </ReferenceInput>
+    </div>
+  );
+};
+
+const CompanyUSProsthetixInputs = () => {
+  return (
+    <div className="flex flex-col gap-4">
+      <h6 className="text-lg font-semibold">US Prosthetix Classification</h6>
+      <SelectInput
+        source="business_type"
+        choices={[
+          { id: "franchisee", name: "Franchisee" },
+          { id: "patient", name: "Patient" },
+          { id: "doctor", name: "Doctor" },
+          { id: "supplier", name: "Supplier" },
+          { id: "other", name: "Other" },
+        ]}
+        helperText={false}
+      />
+      <BooleanInput
+        source="is_oakwood_prospect"
+        label="51 Oakwood Billing Prospect"
+        helperText={false}
+      />
+      <TextInput
+        source="oakwood_billing_code"
+        label="51 Oakwood Billing Code"
+        helperText={false}
+      />
     </div>
   );
 };

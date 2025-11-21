@@ -64,6 +64,10 @@ const DealLinkedToInputs = () => {
 
 const DealMiscInputs = () => {
   const { dealStages, dealCategories } = useConfigurationContext();
+
+  // Use first stage as default (usually "inquiry" or similar)
+  const defaultStage = dealStages.length > 0 ? dealStages[0].value : undefined;
+
   return (
     <div className="flex flex-col gap-4 flex-1">
       <h3 className="text-base font-medium">Misc</h3>
@@ -95,7 +99,7 @@ const DealMiscInputs = () => {
           id: stage.value,
           name: stage.label,
         }))}
-        defaultValue="opportunity"
+        defaultValue={defaultStage}
         helperText={false}
         validate={required()}
       />

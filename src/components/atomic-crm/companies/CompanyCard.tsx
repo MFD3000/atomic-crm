@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Avatar as ContactAvatar } from "../contacts/Avatar";
 import type { Company } from "../types";
 import { CompanyAvatar } from "./CompanyAvatar";
+import { BusinessTypeBadge, OakwoodProspectIndicator } from "../badges";
 
 export const CompanyCard = (props: { record?: Company }) => {
   const createPath = useCreatePath();
@@ -22,12 +23,21 @@ export const CompanyCard = (props: { record?: Company }) => {
       })}
       className="no-underline"
     >
-      <Card className="h-[200px] flex flex-col justify-between p-4 hover:bg-muted">
-        <div className="flex flex-col items-center gap-1">
+      <Card className="min-h-[200px] flex flex-col justify-between p-4 hover:bg-muted">
+        <div className="flex flex-col items-center gap-2">
           <CompanyAvatar />
-          <div className="text-center mt-1">
+          <div className="text-center mt-1 flex flex-col gap-1.5">
             <h6 className="text-sm font-medium">{record.name}</h6>
             <p className="text-xs text-muted-foreground">{record.sector}</p>
+            <div className="flex flex-wrap gap-1.5 justify-center">
+              <BusinessTypeBadge businessType={record.business_type} />
+              {record.is_oakwood_prospect && (
+                <OakwoodProspectIndicator
+                  isOakwoodProspect={record.is_oakwood_prospect}
+                  billingCode={record.oakwood_billing_code}
+                />
+              )}
+            </div>
           </div>
         </div>
         <div className="flex flex-row w-full justify-between gap-2">

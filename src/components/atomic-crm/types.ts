@@ -69,6 +69,9 @@ export type Company = {
   context_links?: string[];
   nb_contacts?: number;
   nb_deals?: number;
+  business_type?: "franchisee" | "patient" | "doctor" | "supplier" | "other";
+  is_oakwood_prospect?: boolean;
+  oakwood_billing_code?: string;
 } & Pick<RaRecord, "id">;
 
 export type EmailAndType = {
@@ -100,6 +103,8 @@ export type Contact = {
   phone_jsonb: PhoneNumberAndType[];
   nb_tasks?: number;
   company_name?: string;
+  patient_type?: "prosthetics" | "orthotics" | "both";
+  referring_doctor?: string;
 } & Pick<RaRecord, "id">;
 
 export type ContactNote = {
@@ -117,6 +122,7 @@ export type Deal = {
   contact_ids: Identifier[];
   category: string;
   stage: string;
+  board_id: Identifier;
   description: string;
   amount: number;
   created_at: string;
@@ -208,10 +214,60 @@ export interface RAFile {
 }
 
 export type AttachmentNote = RAFile;
+
 export interface DealStage {
   value: string;
   label: string;
 }
+
+export type Board = {
+  name: string;
+  description: string;
+  is_default: boolean;
+  position: number;
+  created_by?: Identifier;
+  created_at: string;
+  updated_at: string;
+} & Pick<RaRecord, "id">;
+
+export type BoardStage = {
+  board_id: Identifier;
+  value: string;
+  label: string;
+  color?: string;
+  position: number;
+  created_at: string;
+} & Pick<RaRecord, "id">;
+
+export type BoardTemplate = {
+  name: string;
+  description: string;
+  stages_json: Array<{
+    value: string;
+    label: string;
+    color?: string;
+    position: number;
+  }>;
+  created_at: string;
+} & Pick<RaRecord, "id">;
+
+export type BoardAnalytics = {
+  board_id: Identifier;
+  board_name: string;
+  stage: string;
+  stage_label: string;
+  stage_position: number;
+  deal_count: number;
+  active_count: number;
+  total_amount: number;
+  avg_amount: number;
+  won_count: number;
+  total_deals: number;
+  total_revenue: number;
+  total_won: number;
+  stage_percentage: number;
+  win_rate_from_stage: number;
+} & Pick<RaRecord, "id">;
 
 export interface NoteStatus {
   value: string;

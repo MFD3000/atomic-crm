@@ -5,7 +5,6 @@ import {
   type AuthProvider,
   type DataProvider,
 } from "ra-core";
-import { useEffect } from "react";
 import { Route } from "react-router";
 import { Admin } from "@/components/admin/admin";
 import { ForgotPasswordPage } from "@/components/supabase/forgot-password-page";
@@ -102,19 +101,7 @@ export const CRM = ({
   disableTelemetry,
   ...rest
 }: CRMProps) => {
-  useEffect(() => {
-    if (
-      disableTelemetry ||
-      process.env.NODE_ENV !== "production" ||
-      typeof window === "undefined" ||
-      typeof window.location === "undefined" ||
-      typeof Image === "undefined"
-    ) {
-      return;
-    }
-    const img = new Image();
-    img.src = `https://atomic-crm-telemetry.marmelab.com/atomic-crm-telemetry?domain=${window.location.hostname}`;
-  }, [disableTelemetry]);
+  // Telemetry disabled for US Prosthetix
 
   return (
     <ConfigurationProvider
@@ -161,6 +148,10 @@ export const CRM = ({
         <Resource name="tasks" />
         <Resource name="sales" {...sales} />
         <Resource name="tags" />
+        <Resource name="boards" />
+        <Resource name="board_stages" />
+        <Resource name="board_templates" />
+        <Resource name="deals_board_analytics" />
       </Admin>
     </ConfigurationProvider>
   );

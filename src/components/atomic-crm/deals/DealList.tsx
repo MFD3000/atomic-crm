@@ -5,7 +5,6 @@ import { CreateButton } from "@/components/admin/create-button";
 import { ExportButton } from "@/components/admin/export-button";
 import { List } from "@/components/admin/list";
 import { ReferenceInput } from "@/components/admin/reference-input";
-import { FilterButton } from "@/components/admin/filter-form";
 import { SearchInput } from "@/components/admin/search-input";
 import { SelectInput } from "@/components/admin/select-input";
 
@@ -18,10 +17,11 @@ import { DealEmpty } from "./DealEmpty";
 import { DealListContent } from "./DealListContent";
 import { DealShow } from "./DealShow";
 import { OnlyMineInput } from "./OnlyMineInput";
+import { DealSidebar } from "./boards";
 
 const DealList = () => {
   const { identity } = useGetIdentity();
-  const { dealCategories } = useConfigurationContext();
+  const { dealCategories, currentBoard } = useConfigurationContext();
 
   if (!identity) return null;
 
@@ -38,10 +38,16 @@ const DealList = () => {
     <OnlyMineInput source="sales_id" alwaysOn />,
   ];
 
+  // Filter by current board
+  const filter: Record<string, any> = { "archived_at@is": null };
+  if (currentBoard) {
+    filter.board_id = currentBoard.id;
+  }
+
   return (
     <List
       perPage={100}
-      filter={{ "archived_at@is": null }}
+      filter={filter}
       title={false}
       sort={{ field: "index", order: "DESC" }}
       filters={dealFilters}
@@ -86,7 +92,7 @@ const DealLayout = () => {
 
 const DealActions = () => (
   <TopToolbar>
-    <FilterButton />
+    <DealSidebar />
     <ExportButton />
     <CreateButton label="New Deal" />
   </TopToolbar>
