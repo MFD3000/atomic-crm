@@ -12,9 +12,12 @@
 INSERT INTO auth.users (
     id,
     instance_id,
+    aud,
+    role,
     email,
     encrypted_password,
     email_confirmed_at,
+    confirmation_sent_at,
     raw_app_meta_data,
     raw_user_meta_data,
     created_at,
@@ -22,13 +25,17 @@ INSERT INTO auth.users (
     confirmation_token,
     recovery_token,
     email_change_token_new,
-    email_change
+    email_change,
+    is_sso_user
 )
 VALUES (
     gen_random_uuid(),
     '00000000-0000-0000-0000-000000000000',
+    'authenticated',
+    'authenticated',
     'danieljcapri@gmail.com',
     crypt('Tobydog1!', gen_salt('bf')), -- Password: Tobydog1!
+    NOW(),
     NOW(),
     '{"provider":"email","providers":["email"]}',
     '{"first_name":"Dan","last_name":"Capri"}',
@@ -37,7 +44,8 @@ VALUES (
     '',
     '',
     '',
-    ''
+    '',
+    false
 );
 
 -- Get the sales_id for Dan (will be id=1 since he's the first user and becomes admin)

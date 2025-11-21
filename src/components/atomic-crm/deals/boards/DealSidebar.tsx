@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { LayoutGrid, Plus, Settings, BarChart3, Layers } from "lucide-react";
+import { LayoutGrid, Plus, BarChart3, Layers } from "lucide-react";
 import { useGetIdentity } from "ra-core";
 
 import { useConfigurationContext } from "../../root/ConfigurationContext";
 import type { Sale } from "../../types";
 import { BoardList } from "./BoardList";
 import { BoardAnalytics } from "./BoardAnalytics";
+import { BoardCreateDialog } from "./BoardCreateDialog";
 
 export const DealSidebar = () => {
   const [open, setOpen] = useState(false);
   const [view, setView] = useState<"boards" | "analytics">("boards");
+  const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const { identity } = useGetIdentity<Sale>();
   const { currentBoard, boards } = useConfigurationContext();
-
-  const isAdmin = identity?.administrator;
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -39,19 +39,15 @@ export const DealSidebar = () => {
             <SheetTitle className="font-oswald uppercase text-2xl tracking-wide font-bold text-white">
               {currentBoard?.name || "Boards"}
             </SheetTitle>
-            {isAdmin && (
-              <Button
-                size="sm"
-                variant="ghost"
-                className="text-white hover:bg-slate-800 transition-colors"
-                onClick={() => {
-                  // TODO: Open board management dialog
-                  console.log("Open board management");
-                }}
-              >
-                <Settings className="w-4 h-4" strokeWidth={2} />
-              </Button>
-            )}
+            <Button
+              size="sm"
+              variant="ghost"
+              className="text-white hover:bg-slate-800 transition-colors gap-2"
+              onClick={() => setCreateDialogOpen(true)}
+            >
+              <Plus className="w-4 h-4" strokeWidth={2} />
+              <span className="font-sans text-sm">New Board</span>
+            </Button>
           </div>
           <p className="font-sans text-slate-300 text-sm">
             {view === "boards" ? "Switch between deal pipelines" : "Performance metrics and insights"}
@@ -102,23 +98,10 @@ export const DealSidebar = () => {
             <BoardAnalytics />
           )}
         </div>
-
-        {/* Create Board Button (Admin Only, only in boards view) */}
-        {isAdmin && view === "boards" && (
-          <div className="flex-shrink-0 p-6 border-t border-slate-200 bg-slate-50">
-            <Button
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium gap-2"
-              onClick={() => {
-                // TODO: Open create board dialog
-                console.log("Create new board");
-              }}
-            >
-              <Plus className="w-4 h-4" strokeWidth={2} />
-              Create Board
-            </Button>
-          </div>
-        )}
       </SheetContent>
+
+      {/* Board Create Dialog */}
+      <BoardCreateDialog open={createDialogOpen} onOpenChange={setCreateDialogOpen} />
     </Sheet>
   );
 };
