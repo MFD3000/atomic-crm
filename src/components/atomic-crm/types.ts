@@ -151,6 +151,7 @@ export type Tag = {
 
 export type Task = {
   contact_id: Identifier;
+  deal_id?: Identifier;
   type: string;
   text: string;
   due_date: string;
@@ -269,6 +270,41 @@ export type BoardAnalytics = {
   win_rate_from_stage: number;
 } & Pick<RaRecord, "id">;
 
+export type EventType =
+  | "task"
+  | "milestone"
+  | "meeting"
+  | "appointment"
+  | "deadline";
+export type EventStatus = "scheduled" | "confirmed" | "completed" | "cancelled";
+
+export type Event = {
+  title: string;
+  description?: string;
+  event_type: EventType;
+
+  // Date/time fields
+  start_datetime: string;
+  end_datetime?: string;
+  all_day: boolean;
+
+  // Location and status
+  location?: string;
+  status: EventStatus;
+
+  // Optional links to existing entities
+  task_id?: Identifier;
+  deal_id?: Identifier;
+  contact_id?: Identifier;
+  company_id?: Identifier;
+  sales_id: Identifier;
+
+  // Metadata
+  created_at: string;
+  updated_at: string;
+  created_by?: Identifier;
+} & Pick<RaRecord, "id">;
+
 export interface NoteStatus {
   value: string;
   label: string;
@@ -279,4 +315,46 @@ export interface ContactGender {
   value: string;
   label: string;
   icon: ComponentType<{ className?: string }>;
+}
+
+// Chat Agent Types
+
+export type ChatActionType =
+  | "create_company"
+  | "create_contact"
+  | "create_deal"
+  | "create_task"
+  | "create_note"
+  | "update_company"
+  | "update_contact"
+  | "link_contact_to_company";
+
+export interface ChatExecutedAction {
+  id: string;
+  type: ChatActionType;
+  description: string;
+  success: boolean;
+  result?: {
+    recordId: number;
+    recordType: "company" | "contact" | "deal" | "task" | "note";
+    name?: string;
+  };
+  error?: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  executedActions?: ChatExecutedAction[];
+  timestamp: string;
+}
+
+export interface ChatResponse {
+  message: string;
+  executedActions: ChatExecutedAction[];
+  conversationHistory: Array<{
+    role: "user" | "assistant";
+    content: string;
+  }>;
 }

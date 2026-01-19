@@ -1,5 +1,6 @@
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { Settings, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Settings, User, Sparkles } from "lucide-react";
 import { CanAccess } from "ra-core";
 import { Link, matchPath, useLocation } from "react-router";
 import { RefreshButton } from "@/components/admin/refresh-button";
@@ -8,9 +9,11 @@ import { UserMenu } from "@/components/admin/user-menu";
 import { useUserMenu } from "@/hooks/user-menu-context";
 
 import { useConfigurationContext } from "../root/ConfigurationContext";
+import { useChatContext } from "../chat";
 
 const Header = () => {
   const { darkModeLogo, lightModeLogo, title } = useConfigurationContext();
+  const { openChat } = useChatContext();
   const location = useLocation();
 
   let currentPath: string | boolean = "/";
@@ -22,6 +25,8 @@ const Header = () => {
     currentPath = "/companies";
   } else if (matchPath("/deals/*", location.pathname)) {
     currentPath = "/deals";
+  } else if (matchPath("/events/*", location.pathname)) {
+    currentPath = "/events";
   } else {
     currentPath = false;
   }
@@ -69,9 +74,25 @@ const Header = () => {
                   to="/deals"
                   isActive={currentPath === "/deals"}
                 />
+                <NavigationTab
+                  label="Calendar"
+                  to="/events"
+                  isActive={currentPath === "/events"}
+                />
               </nav>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={openChat}
+                className="gap-2 bg-gradient-to-r from-blue-500/10 to-violet-500/10 border-blue-500/30 hover:border-blue-500/50 hover:from-blue-500/20 hover:to-violet-500/20 transition-all"
+              >
+                <Sparkles className="w-4 h-4 text-blue-600" strokeWidth={2} />
+                <span className="hidden sm:inline font-medium text-blue-700">
+                  Agent
+                </span>
+              </Button>
               <ThemeModeToggle />
               <RefreshButton />
               <UserMenu>

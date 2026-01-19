@@ -1,9 +1,15 @@
 import type { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
+// Use SERVICE_ROLE_KEY if available (for local dev), fallback to SUPABASE_SERVICE_ROLE_KEY
+const serviceRoleKey =
+  Deno.env.get("SERVICE_ROLE_KEY") ??
+  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ??
+  "";
+
 export const supabaseAdmin: SupabaseClient = createClient(
   Deno.env.get("SUPABASE_URL") ?? "",
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+  serviceRoleKey,
   {
     auth: {
       autoRefreshToken: false,

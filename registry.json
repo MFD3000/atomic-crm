@@ -639,6 +639,58 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/chat/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/chat/ExecutedAction.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/chat/ChatProvider.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/chat/ChatPanel.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/chat/ChatMessages.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/chat/ChatMessage.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/chat/ChatInput.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/calendar/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/calendar/MonthView.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/calendar/EventList.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/calendar/EventEdit.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/calendar/EventCreate.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/calendar/CalendarPage.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/badges/index.ts",
           "type": "registry:component"
         },

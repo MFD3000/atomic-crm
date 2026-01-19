@@ -155,3 +155,6 @@ s3_secret_key = "env(S3_SECRET_KEY)"
 
 [functions.postmark]
 verify_jwt = false
+
+[functions.chat]
+verify_jwt = false
