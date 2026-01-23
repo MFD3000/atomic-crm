@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { LayoutGrid, Plus, BarChart3, Layers } from "lucide-react";
 import { useGetIdentity } from "ra-core";
@@ -50,7 +56,9 @@ export const DealSidebar = () => {
             </Button>
           </div>
           <p className="font-sans text-slate-300 text-sm">
-            {view === "boards" ? "Switch between deal pipelines" : "Performance metrics and insights"}
+            {view === "boards"
+              ? "Switch between deal pipelines"
+              : "Performance metrics and insights"}
           </p>
         </SheetHeader>
 
@@ -101,7 +109,10 @@ export const DealSidebar = () => {
       </SheetContent>
 
       {/* Board Create Dialog */}
-      <BoardCreateDialog open={createDialogOpen} onOpenChange={setCreateDialogOpen} />
+      <BoardCreateDialog
+        open={createDialogOpen}
+        onOpenChange={setCreateDialogOpen}
+      />
     </Sheet>
   );
 };

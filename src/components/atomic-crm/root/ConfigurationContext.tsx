@@ -94,7 +94,7 @@ export const ConfigurationProvider = ({
       title,
       taskTypes,
       contactGender,
-    ]
+    ],
   );
 
   return (
@@ -126,9 +126,13 @@ export const useConfigurationContext = () => {
   }
 
   // Override dealStages with board stages if available
-  const dealStages = boardsContext.currentBoardStages.length > 0
-    ? boardsContext.currentBoardStages.map(s => ({ value: s.value, label: s.label }))
-    : config.dealStages;
+  const dealStages =
+    boardsContext.currentBoardStages.length > 0
+      ? boardsContext.currentBoardStages.map((s) => ({
+          value: s.value,
+          label: s.label,
+        }))
+      : config.dealStages;
 
   return {
     ...config,

@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Plus, Trash2, ChevronUp, ChevronDown, GripVertical } from "lucide-react";
+import {
+  Plus,
+  Trash2,
+  ChevronUp,
+  ChevronDown,
+  GripVertical,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,7 +38,7 @@ export const StageBuilder = ({ stages, onChange }: StageBuilderProps) => {
 
   const addStage = () => {
     const newPosition = stages.length + 1;
-    const colorIndex = (stages.length) % DEFAULT_COLORS.length;
+    const colorIndex = stages.length % DEFAULT_COLORS.length;
 
     onChange([
       ...stages,
@@ -66,7 +72,10 @@ export const StageBuilder = ({ stages, onChange }: StageBuilderProps) => {
 
     const newIndex = direction === "up" ? index - 1 : index + 1;
     const updatedStages = [...stages];
-    [updatedStages[index], updatedStages[newIndex]] = [updatedStages[newIndex], updatedStages[index]];
+    [updatedStages[index], updatedStages[newIndex]] = [
+      updatedStages[newIndex],
+      updatedStages[index],
+    ];
 
     // Reindex positions
     const reindexed = updatedStages.map((stage, i) => ({
@@ -76,7 +85,11 @@ export const StageBuilder = ({ stages, onChange }: StageBuilderProps) => {
     onChange(reindexed);
   };
 
-  const updateStage = (index: number, field: keyof StageData, value: string) => {
+  const updateStage = (
+    index: number,
+    field: keyof StageData,
+    value: string,
+  ) => {
     const updatedStages = [...stages];
     updatedStages[index] = {
       ...updatedStages[index],
@@ -99,7 +112,8 @@ export const StageBuilder = ({ stages, onChange }: StageBuilderProps) => {
       const isValid = /^[a-z0-9-_]+$/.test(value);
       const newErrors = { ...errors };
       if (!isValid && value) {
-        newErrors[index] = "Only lowercase letters, numbers, hyphens, and underscores";
+        newErrors[index] =
+          "Only lowercase letters, numbers, hyphens, and underscores";
       } else {
         delete newErrors[index];
       }
@@ -134,7 +148,9 @@ export const StageBuilder = ({ stages, onChange }: StageBuilderProps) => {
 
       {stages.length === 0 ? (
         <div className="border-2 border-dashed border-slate-200 rounded-lg p-8 text-center bg-slate-50">
-          <p className="font-sans text-slate-600">No stages yet. Add your first stage to get started.</p>
+          <p className="font-sans text-slate-600">
+            No stages yet. Add your first stage to get started.
+          </p>
           <Button
             type="button"
             onClick={addStage}
@@ -161,36 +177,51 @@ export const StageBuilder = ({ stages, onChange }: StageBuilderProps) => {
                 <div className="flex-1 space-y-3">
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <Label htmlFor={`stage-label-${index}`} className="font-sans text-sm font-medium text-slate-900">
+                      <Label
+                        htmlFor={`stage-label-${index}`}
+                        className="font-sans text-sm font-medium text-slate-900"
+                      >
                         Stage Name
                       </Label>
                       <Input
                         id={`stage-label-${index}`}
                         value={stage.label}
-                        onChange={(e) => updateStage(index, "label", e.target.value)}
+                        onChange={(e) =>
+                          updateStage(index, "label", e.target.value)
+                        }
                         placeholder="e.g., Inquiry"
                         className="mt-1 border-slate-200 focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                     <div>
-                      <Label htmlFor={`stage-value-${index}`} className="font-sans text-sm font-medium text-slate-900">
+                      <Label
+                        htmlFor={`stage-value-${index}`}
+                        className="font-sans text-sm font-medium text-slate-900"
+                      >
                         Stage ID
                       </Label>
                       <Input
                         id={`stage-value-${index}`}
                         value={stage.value}
-                        onChange={(e) => updateStage(index, "value", e.target.value)}
+                        onChange={(e) =>
+                          updateStage(index, "value", e.target.value)
+                        }
                         placeholder="e.g., inquiry"
                         className="mt-1 border-slate-200 focus:ring-2 focus:ring-blue-500"
                       />
                       {errors[index] && (
-                        <p className="font-sans text-xs text-red-500 mt-1">{errors[index]}</p>
+                        <p className="font-sans text-xs text-red-500 mt-1">
+                          {errors[index]}
+                        </p>
                       )}
                     </div>
                   </div>
 
                   <div>
-                    <Label htmlFor={`stage-color-${index}`} className="font-sans text-sm font-medium text-slate-900">
+                    <Label
+                      htmlFor={`stage-color-${index}`}
+                      className="font-sans text-sm font-medium text-slate-900"
+                    >
                       Stage Color
                     </Label>
                     <div className="flex gap-2 mt-1">
@@ -198,7 +229,9 @@ export const StageBuilder = ({ stages, onChange }: StageBuilderProps) => {
                         id={`stage-color-${index}`}
                         type="color"
                         value={stage.color}
-                        onChange={(e) => updateStage(index, "color", e.target.value)}
+                        onChange={(e) =>
+                          updateStage(index, "color", e.target.value)
+                        }
                         className="w-20 h-10 cursor-pointer"
                       />
                       <div className="flex gap-1">
@@ -257,7 +290,8 @@ export const StageBuilder = ({ stages, onChange }: StageBuilderProps) => {
 
       {stages.length > 0 && (
         <p className="font-sans text-xs text-slate-600">
-          Tip: Stage IDs are auto-generated from stage names. They must be unique and URL-safe.
+          Tip: Stage IDs are auto-generated from stage names. They must be
+          unique and URL-safe.
         </p>
       )}
     </div>

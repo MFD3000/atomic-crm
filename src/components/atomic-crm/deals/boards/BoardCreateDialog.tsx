@@ -29,7 +29,10 @@ interface BoardFormData {
   stages: StageData[];
 }
 
-export const BoardCreateDialog = ({ open, onOpenChange }: BoardCreateDialogProps) => {
+export const BoardCreateDialog = ({
+  open,
+  onOpenChange,
+}: BoardCreateDialogProps) => {
   const dataProvider = useDataProvider();
   const notify = useNotify();
   const { identity } = useGetIdentity<Sale>();
@@ -49,7 +52,12 @@ export const BoardCreateDialog = ({ open, onOpenChange }: BoardCreateDialogProps
       description: "",
       stages: [
         { value: "open", label: "Open", color: "#3b82f6", position: 1 },
-        { value: "in-progress", label: "In Progress", color: "#f59e0b", position: 2 },
+        {
+          value: "in-progress",
+          label: "In Progress",
+          color: "#f59e0b",
+          position: 2,
+        },
         { value: "closed", label: "Closed", color: "#22c55e", position: 3 },
       ],
     },
@@ -89,7 +97,8 @@ export const BoardCreateDialog = ({ open, onOpenChange }: BoardCreateDialogProps
         filter: {},
       });
 
-      const nextPosition = boards.length > 0 ? (boards[0].position || 0) + 1 : 1;
+      const nextPosition =
+        boards.length > 0 ? (boards[0].position || 0) + 1 : 1;
 
       // Create the board
       const { data: newBoard } = await dataProvider.create<Board>("boards", {
@@ -147,14 +156,18 @@ export const BoardCreateDialog = ({ open, onOpenChange }: BoardCreateDialogProps
             Create New Board
           </DialogTitle>
           <DialogDescription className="font-sans text-slate-600">
-            Create a custom board with your own stages to organize deals in your workflow.
+            Create a custom board with your own stages to organize deals in your
+            workflow.
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-4">
           {/* Board Name */}
           <div className="space-y-2">
-            <Label htmlFor="name" className="font-oswald uppercase text-base tracking-wide font-semibold text-slate-900">
+            <Label
+              htmlFor="name"
+              className="font-oswald uppercase text-base tracking-wide font-semibold text-slate-900"
+            >
               Board Name <span className="text-red-500">*</span>
             </Label>
             <Input
@@ -165,13 +178,18 @@ export const BoardCreateDialog = ({ open, onOpenChange }: BoardCreateDialogProps
               className="border-slate-200 focus:ring-2 focus:ring-blue-500 font-sans"
             />
             {errors.name && (
-              <p className="font-sans text-sm text-red-500">{errors.name.message}</p>
+              <p className="font-sans text-sm text-red-500">
+                {errors.name.message}
+              </p>
             )}
           </div>
 
           {/* Board Description */}
           <div className="space-y-2">
-            <Label htmlFor="description" className="font-oswald uppercase text-base tracking-wide font-semibold text-slate-900">
+            <Label
+              htmlFor="description"
+              className="font-oswald uppercase text-base tracking-wide font-semibold text-slate-900"
+            >
               Description
             </Label>
             <Textarea

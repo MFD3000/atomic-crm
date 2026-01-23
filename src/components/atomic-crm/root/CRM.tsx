@@ -14,6 +14,7 @@ import companies from "../companies";
 import contacts from "../contacts";
 import { Dashboard } from "../dashboard/Dashboard";
 import deals from "../deals";
+import calendar from "../calendar";
 import { Layout } from "../layout/Layout";
 import { SignupPage } from "../login/SignupPage";
 import {
@@ -143,6 +144,7 @@ export const CRM = ({
         <Resource name="deals" {...deals} />
         <Resource name="contacts" {...contacts} />
         <Resource name="companies" {...companies} />
+        <Resource name="events" {...calendar} />
         <Resource name="contactNotes" />
         <Resource name="dealNotes" />
         <Resource name="tasks" />

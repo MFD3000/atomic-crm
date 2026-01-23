@@ -12,7 +12,8 @@ interface BoardListProps {
 
 export const BoardList = ({ onBoardSelect }: BoardListProps) => {
   const dataProvider = useDataProvider();
-  const { currentBoard, boards, boardsLoading, switchBoard } = useConfigurationContext();
+  const { currentBoard, boards, boardsLoading, switchBoard } =
+    useConfigurationContext();
 
   // Fetch deal counts per board
   const { data: dealsData } = useQuery({
@@ -34,7 +35,7 @@ export const BoardList = ({ onBoardSelect }: BoardListProps) => {
       acc[board.id] = deals.filter((d) => d.board_id === board.id).length;
       return acc;
     },
-    {} as Record<Identifier, number>
+    {} as Record<Identifier, number>,
   );
 
   const handleBoardClick = (boardId: Identifier) => {
@@ -46,10 +47,7 @@ export const BoardList = ({ onBoardSelect }: BoardListProps) => {
     return (
       <div className="space-y-2">
         {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="h-20 bg-slate-100 rounded-lg animate-pulse"
-          />
+          <div key={i} className="h-20 bg-slate-100 rounded-lg animate-pulse" />
         ))}
       </div>
     );
@@ -58,9 +56,7 @@ export const BoardList = ({ onBoardSelect }: BoardListProps) => {
   if (boards.length === 0) {
     return (
       <div className="text-center py-8">
-        <p className="font-sans text-slate-500 text-sm">
-          No boards available
-        </p>
+        <p className="font-sans text-slate-500 text-sm">No boards available</p>
       </div>
     );
   }

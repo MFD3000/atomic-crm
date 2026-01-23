@@ -15,11 +15,14 @@ export const BoardAnalytics = () => {
     queryKey: ["deals_board_analytics", "getList", currentBoard?.id],
     queryFn: async () => {
       if (!currentBoard) return { data: [] };
-      return await dataProvider.getList<BoardAnalyticsType>("deals_board_analytics", {
-        pagination: { page: 1, perPage: 100 },
-        sort: { field: "stage_position", order: "ASC" },
-        filter: { board_id: currentBoard.id },
-      });
+      return await dataProvider.getList<BoardAnalyticsType>(
+        "deals_board_analytics",
+        {
+          pagination: { page: 1, perPage: 100 },
+          sort: { field: "stage_position", order: "ASC" },
+          filter: { board_id: currentBoard.id },
+        },
+      );
     },
     enabled: !!currentBoard,
   });
@@ -32,7 +35,10 @@ export const BoardAnalytics = () => {
         <div className="h-48 bg-slate-100 rounded-lg animate-pulse" />
         <div className="grid grid-cols-3 gap-3">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-24 bg-slate-100 rounded-lg animate-pulse" />
+            <div
+              key={i}
+              className="h-24 bg-slate-100 rounded-lg animate-pulse"
+            />
           ))}
         </div>
       </div>
@@ -55,16 +61,22 @@ export const BoardAnalytics = () => {
 
   // Get board-level totals (same for all rows)
   const totals = analytics[0];
-  const winRate = totals?.total_deals > 0
-    ? ((totals.total_won / totals.total_deals) * 100).toFixed(1)
-    : "0";
+  const winRate =
+    totals?.total_deals > 0
+      ? ((totals.total_won / totals.total_deals) * 100).toFixed(1)
+      : "0";
 
   // Prepare chart data
   const chartData = analytics.map((a) => ({
     stage: a.stage_label,
     deals: a.deal_count,
     active: a.active_count,
-    color: a.stage === "won" ? "#22c55e" : a.stage === "lost" ? "#ef4444" : "#3b82f6",
+    color:
+      a.stage === "won"
+        ? "#22c55e"
+        : a.stage === "lost"
+          ? "#ef4444"
+          : "#3b82f6",
   }));
 
   return (
@@ -174,8 +186,8 @@ export const BoardAnalytics = () => {
                   stage.stage === "won"
                     ? "bg-green-500"
                     : stage.stage === "lost"
-                    ? "bg-red-500"
-                    : "bg-blue-500"
+                      ? "bg-red-500"
+                      : "bg-blue-500"
                 }`}
                 style={{ width: `${stage.stage_percentage}%` }}
               />

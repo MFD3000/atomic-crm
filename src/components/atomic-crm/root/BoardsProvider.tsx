@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 import { useDataProvider } from "ra-core";
 import { useQuery } from "@tanstack/react-query";
 import type { Identifier } from "ra-core";
@@ -29,11 +36,13 @@ const BoardsContext = createContext<BoardsContextValue>({
 
 export const BoardsProvider = ({ children }: { children: ReactNode }) => {
   const dataProvider = useDataProvider();
-  const [currentBoardId, setCurrentBoardId] = useState<Identifier | null>(() => {
-    // Load last-used board from localStorage
-    const stored = localStorage.getItem(CURRENT_BOARD_KEY);
-    return stored ? Number(stored) : null;
-  });
+  const [currentBoardId, setCurrentBoardId] = useState<Identifier | null>(
+    () => {
+      // Load last-used board from localStorage
+      const stored = localStorage.getItem(CURRENT_BOARD_KEY);
+      return stored ? Number(stored) : null;
+    },
+  );
 
   // Fetch boards from database
   const {
@@ -128,13 +137,11 @@ export const BoardsProvider = ({ children }: { children: ReactNode }) => {
       boardsError,
       stagesError,
       refetchBoards,
-    ]
+    ],
   );
 
   return (
-    <BoardsContext.Provider value={value}>
-      {children}
-    </BoardsContext.Provider>
+    <BoardsContext.Provider value={value}>{children}</BoardsContext.Provider>
   );
 };
 

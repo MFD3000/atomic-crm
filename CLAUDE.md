@@ -72,6 +72,7 @@ src/
 │       ├── root/        # CRM component and configuration
 │       ├── sales/       # Sales/user management
 │       ├── settings/    # Settings page
+│       ├── calendar/    # Calendar/events feature
 │       └── types.ts     # TypeScript types
 supabase/
 ├── functions/           # Edge functions (user management, email processing)
@@ -87,7 +88,7 @@ supabase/
 
 **Data Providers**: Switch between Supabase (production) and FakeRest (development) providers. The Supabase provider uses `ra-supabase-core` and includes lifecycle callbacks for avatar generation, file uploads, and full-text search. See `src/components/atomic-crm/providers/supabase/dataProvider.ts`.
 
-**Resources**: The app manages these resources via `ra-core`: `deals`, `contacts`, `companies`, `contactNotes`, `dealNotes`, `tasks`, `sales`, `tags`.
+**Resources**: The app manages these resources via `ra-core`: `deals`, `contacts`, `companies`, `contactNotes`, `dealNotes`, `tasks`, `sales`, `tags`, `events`, `boards`, `board_stages`, `board_templates`.
 
 **Database Views**: Used to reduce HTTP overhead and simplify frontend code. For example, `contacts_summary` view provides contact list data with aggregated task counts. Views are defined in `supabase/migrations/20240730075029_init_db.sql` and emulated in the FakeRest provider.
 
@@ -142,6 +143,9 @@ Create migrations with Supabase CLI. Migrations live in `supabase/migrations/`. 
 - `20240808141826_init_state_configure.sql` - State configuration
 - `20250109152531_email_jsonb.sql` - Email JSONB support
 - `20250113132531_phone_jsonb.sql` - Phone JSONB support
+- `20251119000000_us_prosthetix_fields.sql` - US Prosthetix custom fields (business_type, patient_type, etc.)
+- `20251121000000_configurable_boards.sql` - Configurable Kanban boards system
+- `20251122010000_create_events_table.sql` - Calendar events
 
 ## Access Control
 
