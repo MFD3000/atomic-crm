@@ -39,3 +39,4 @@ dist/
 public/r/
 
 !supabase/functions/.env
+.env.development
